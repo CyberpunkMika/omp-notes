@@ -7,5 +7,7 @@ Palette (a section that sits alongside blocks, not inside blocks, that defines a
 
 Blocks (the main section of a themes file that contains all the segments that make up the final prompt)
 
-Segments (the individual parts of the final prompt. Some segments will only display under certain circumstances (for example when changing to a folder that is a local git repo))
+Segments (the individual parts of the final prompt. Some segments will only display under certain circumstances (for example when changing to a folder that is a local git repo). All segments are contained within the `blocks` section)
+
+Segments can be configured to be displayed on the left hand or right hand side to the prompt window and can be configured on multiple lines if desired.
 

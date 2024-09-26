@@ -1,0 +1,177 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "gunmetal": "#2E3440",
+    "glaucous": "#5E81AC",
+    "air-superiority-blue": "#81A1C1",
+    "sky-blue": "#88C0D0",
+    "cambridge-blue": "#8FBCBB",
+    "olivine": "#A3BE8C",
+    "sunset": "#EBCB8B",
+    "burnt-sienna": "#D08770",
+    "indian-red": "#BF616A",
+    "lilac": "#B48EAD",
+    "eerie-black": "#242424",
+    "anti-flash-white": "#ECEFF4"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground": "p:anti-flash-white",
+          "style": "plain",
+          "template": "\u256d\u2500",
+          "type": "text"
+        },
+        {
+          "background": "p:cambridge-blue",
+          "foreground": "p:gunmetal",
+          "leading_diamond": "\ue0b6",
+          "properties": {
+            "windows": "\ue62a"
+          },
+          "style": "diamond",
+          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "type": "os"
+        },
+        {
+          "background": "p:air-superiority-blue",
+          "foreground": "p:gunmetal",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "style": "folder"
+          },
+
+          "style": "powerline",
+          "template": " \uf07b </>{{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "background": "p:olivine",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:burnt-sienna{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:sunset{{ end }}",
+            "{{ if gt .Ahead 0 }}p:lilac{{ end }}",
+            "{{ if gt .Behind 0 }}p:lilac{{ end }}"
+          ],
+          "foreground": "p:gunmetal",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "style": "powerline",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
+          "type": "git"
+        },
+        {
+          "background": "p:lilac",
+          "foreground": "p:gunmetal",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "powerline",
+          "template": " \ueba2 {{ .FormattedMs }} ",
+          "type": "executiontime"
+        },
+        {
+          "background": "p:cambridge-blue",
+          "background_templates": ["{{ if gt .Code 0 }}p:indian-red{{ end }}"],
+          "foreground": "p:gunmetal",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "diamond",
+          "template": " {{ if gt .Code 0 }}\uf421{{ else }}\uf469{{ end }} ",
+          "trailing_diamond": "\ue0b0",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "background": "p:burnt-sienna",
+          "foreground": "p:gunmetal",
+          "invert_powerline": true,
+          "powerline_symbol": "\ue0b2",
+          "style": "powerline",
+          "template": "\uf489 {{ .Name }} </>",
+          "type": "shell"
+        },
+        {
+          "background": "#A3BE8C",
+          "invert_powerline": true,
+          "powerline_symbol": "\ue0b2",
+          "background_templates": [
+            "{{if eq \"Charging\" .State.String}}p:olivine{{end}}",
+            "{{if eq \"Discharging\" .State.String}}p:olivine{{end}}",
+            "{{if eq \"Full\" .State.String}}p:olivine{{end}}"
+          ],
+          "foreground": "p:eerie-black",
+          "style": "powerline",
+          "template": "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}\uf295 \ueb2d ",
+          "type": "battery"
+        },
+        {
+          "background": "p:air-superiority-blue",
+          "foreground": "p:gunmetal",
+          "invert_powerline": true,
+          "trailing_diamond": "\ue0b4",
+          "style": "diamond",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "template": " \ue641 {{ .CurrentDate | date .Format }} ",
+          "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "p:anti-flash-white",
+          "style": "plain",
+          "template": "\u2570\u2500",
+          "type": "text"
+        },
+        {
+          "background": "p:glaucous",
+          "foreground": "p:gunmetal",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b0",
+          "style": "diamond",
+          "template": "{{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }}",
+          "type": "session"
+        },
+        {
+          "foreground": "p:cambridge-blue",
+          "foreground_templates": ["{{ if gt .Code 0 }}p:indian-red{{ end }}"],
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": " <p:lilac>\u276f</><p:olivine>\u276f</><p:sunset>\u276f</> ",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "transient_prompt": {
+    "background": "transparent",
+    "foreground": "#4C566A",
+    "template": "<p:lilac>\u276f</><p:olivine>\u276f</><p:sunset>\u276f</> "
+  },
+  "final_space": false,
+  "version": 2
+}
